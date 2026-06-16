@@ -8,30 +8,31 @@ from Models.libro import Libro
 class LibroDAO:
     #Select * from libros
     def obtener_libros(self):
-        Conexion = Conexion.obtener_conexion()
-        cursor = Conexion.cursor()
+        conexion = Conexion.obtener_conexion()
+        cursor = conexion.cursor()
         
         #Ejecuta la consulta
-        cursor.executs("Select * FROM libro")
+        cursor.execute("Select * FROM libro")
         #Obtiene los resultados
         registros = cursor.fetchall()
 
         #Crear una lista de clase libro
-        Libros=[]
+        libros=[]
         for  registros in registros:
-            Libro = Libro(
-            id=registros[0],
-            titulo=registros[1],
-            autor=registros[2],
-            isbn=registros[1],
-            dispobible=registros[4]
-        )
+            libro = Libro(
+                id=registros[0],
+                titulo=registros[1],
+                autor=registros[2],
+                isbn=registros[1],
+                disponible=registros[4]
+            )
         
-        Libros.append(Libro)
+            libros.append(libro)
         #Cerrar la conexion
         cursor.close()
-        Conexion.close()
-        return Libros
+        conexion.close()
+       #Conexion.close()
+        return libros
 
     #Insertar
     def insertar(self,libro):

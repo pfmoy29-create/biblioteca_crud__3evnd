@@ -12,6 +12,7 @@ def main():
         else :
             for libro in libros:
                 print(f"{libro.titulo} -{libro.autor} - {libro.disponible}")
+                
         print("\n Conexion exitosa a la base de datos")
     except Exception as e:
         print(f"Error al conectar a la base de datos: {e}")
