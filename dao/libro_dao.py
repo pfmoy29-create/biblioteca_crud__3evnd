@@ -10,9 +10,21 @@ class LibroDAO:
     def obtener_libros(self):
         conexion = Conexion.obtener_conexion()
         cursor = conexion.cursor()
+
+        sql = """
+            SELECT 
+            libro.id_libro,
+            libro.titulo,
+            autor.nombre as autor,
+            libro.isbn,
+            libro.disponible
+            FROM libro
+            INNER JOIN autor
+            ON Libro.autor = autor.id
+         """
         
         #Ejecuta la consulta
-        cursor.execute("Select * FROM libro")
+        cursor.execute(sql)
         #Obtiene los resultados
         registros = cursor.fetchall()
 
