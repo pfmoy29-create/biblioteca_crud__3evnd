@@ -1,6 +1,5 @@
 #Clase usuario
 
-from Models.libro import Libro
 
 class Usuario:
 
