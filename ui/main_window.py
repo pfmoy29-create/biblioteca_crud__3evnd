@@ -26,18 +26,24 @@ def main_window(page: ft.Page):
 
     # Creación del contenedor principal
     contenido = ft.Container(
-        content = ft.Column(
-            controls = [
-                titulo,
-                subtitulo
-            ],
-            spacing = 10,
-        ),
         padding = 30,
         expand = True
     )
-    def insertar_libro(e):
-        contenido.content = libro_form()
+
+    def inicio():
+        return ft.Column(
+            controls= [
+                titulo,
+                subtitulo
+            ],
+            spacing= 10,
+        )
+    def mostrar_inicio(e=None):
+        contenido.content = inicio()
+        page.update()
+    
+    def mostrar_insertar_libro(e= None):
+        contenido.content = libro_form(mostrar_inicio)
         page.update()
 
     # Creación del menú lateral
@@ -60,11 +66,18 @@ def main_window(page: ft.Page):
                 ),
                 ft.Divider(color=ft.Colors.BLUE_GREY_700),
                 #botones
+
+                ft.ElevatedButton(
+                    "inicio",
+                    icon = ft.Icons.HOME,
+                    width = 180,
+                    on_click = mostrar_inicio
+                ),
                 ft.ElevatedButton(
                     "Libros",
                     icon = ft.Icons.BOOK,
                     width = 180,
-                    on_click= insertar_libro
+                    on_click= mostrar_insertar_libro
                 ),
                 ft.ElevatedButton(
                     "Usuarios",
@@ -94,5 +107,7 @@ def main_window(page: ft.Page):
         ],
         expand=True
     )
-
+    #Agregar layout a la pagina
     page.add(layout)
+
+    mostrar_inicio() #Mostrar la vista de incio al cargar la pagina
